@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="city1" placeholder="Enter city 1">
+  <input type="text" name="city2" placeholder="Enter city 2">
+  <button type="submit">Compare Weather</button>
+</form>
+
+<div class="comparison-container">
+  {% if weather_data1 %}
+    <div class="city-container">
+      <h2>{{ weather_data1.city }}</h2>
+      <p>Temperature: {{ weather_data1.temperature }}°C</p>
+      <p>Description: {{ weather_data1.description }}</p>
+      <img src="http://openweathermap.org/img/wn/{{ weather_data1.icon }}@2x.png" alt="weather icon">
+    </div>
+  {% endif %}
+  {% if weather_data2 %}
+    <div class="city-container">
+      <h2>{{ weather_data2.city }}</h2>
+      <p>Temperature: {{ weather_data2.temperature }}°C</p>
+      <p>Description: {{ weather_data2.description }}</p>
+      <img src="http://openweathermap.org/img/wn/{{ weather_data2.icon }}@2x.png" alt="weather icon">
+    </div>
+  {% endif %}
+</div>
+
+</body>
+</html>
